@@ -17,9 +17,7 @@ path = [
     "CONTRIBUTING.md",
     "Dockerfile",
     "Makefile",
-    "mkdocs.yml",
     "hack/**.sh",
-    "mkdocs.yml",
     "REUSE.toml"
 ]
 precedence = "aggregate"
@@ -27,7 +25,7 @@ SPDX-FileCopyrightText = "2023 SAP SE or an SAP affiliate company and IronCore c
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
-path = ["docs/**", "README.md"]
+path = ["README.md"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023 SAP SE or an SAP affiliate company and IronCore contributors"
 SPDX-License-Identifier = "Apache-2.0"

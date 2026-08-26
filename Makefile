@@ -1,9 +1,6 @@
 # Image URL to use all building/pushing image targets
 IMG ?= controller:latest
 
-# Docker image name for the mkdocs based local development setup
-MKDOCS_IMG=onmetal/libvirt-provider-docs
-
 LIBVIRT_PROVIDER_BIN=$(LOCALBIN)/libvirt-provider
 LIBVIRT_PROVIDER_BIN_SOURCE=./cmd/libvirt-provider
 
@@ -119,17 +116,6 @@ iiab-tests-local: ## Run iiab tests against a local checkout (usage: make iiab-t
 .PHONY: iiab-clean
 iiab-clean: ## Delete the iiab test kind cluster and remove cloned directory
 	hack/iiab-tests.sh clean
-
-##@ Documentation
-
-.PHONY: start-docs
-start-docs: ## Start the local mkdocs based development environment.
-	$(CONTAINER_TOOL) build -t ${MKDOCS_IMG} -f docs/Dockerfile .
-	$(CONTAINER_TOOL) run -p 8000:8000 -v `pwd`/:/docs ${MKDOCS_IMG}
-
-.PHONY: clean-docs
-clean-docs: ## Remove all local mkdocs Docker images (cleanup).
-	$(CONTAINER_TOOL) container prune --force --filter "label=project=libvirt-provider_documentation"
 
 ##@ Build
 
