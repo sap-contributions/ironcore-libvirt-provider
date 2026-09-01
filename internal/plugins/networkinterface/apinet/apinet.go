@@ -64,6 +64,18 @@ type Plugin struct {
 	restConfig    *rest.Config
 	mu            sync.RWMutex
 	eventHandlers []providernetworkinterface.EventHandler
+
+	// cacheErrCh carries a terminal informer cache start error so that a dead
+	// watch is surfaced to the caller instead of only logged.
+	cacheErrCh <-chan error
+}
+
+// CacheErrors returns a channel that receives the terminal informer cache error
+// if the watch fails after Init. It delivers at most one error and is not closed;
+// callers should select on it together with their own done/ctx channel rather than
+// ranging over it. Consumers react to a silently-killed watch by observing this.
+func (p *Plugin) CacheErrors() <-chan error {
+	return p.cacheErrCh
 }
 
 func NewPlugin(nodeName string, restCfg *rest.Config) providernetworkinterface.Plugin {
@@ -332,11 +344,10 @@ func (p *Plugin) startWatcher(ctx context.Context) error {
 		return fmt.Errorf("failed to add event handler: %w", err)
 	}
 
-	go func() {
-		if err := c.Start(ctx); err != nil {
-			log.Error(err, "Informer cache stopped with error")
-		}
-	}()
+	// Start before WaitForCacheSync: controller-runtime starts informers in
+	// Start, so a sync-first order would deadlock. Terminal Start errors are
+	// surfaced via CacheErrors to make a dead watch visible to the caller.
+	p.cacheErrCh = SuperviseCache(ctx, log.WithName("cache"), c.Start)
 
 	if !c.WaitForCacheSync(ctx) {
 		return fmt.Errorf("failed to sync informer cache")
@@ -348,6 +359,27 @@ func (p *Plugin) startWatcher(ctx context.Context) error {
 	}
 
 	return nil
+}
+
+// SuperviseCache runs start in the background and returns a channel that receives
+// a terminal (non-nil) error from start. A dead informer watch is surfaced to the
+// caller instead of only logged. The returned channel delivers at most one error,
+// is buffered, and is not closed; it never blocks the supervised goroutine. A
+// clean stop (start returns nil, e.g. graceful shutdown) sends nothing.
+func SuperviseCache(ctx context.Context, log logr.Logger, start func(ctx context.Context) error) <-chan error {
+	errCh := make(chan error, 1)
+
+	go func() {
+		if err := start(ctx); err != nil {
+			log.Error(err, "Informer cache stopped with error")
+			select {
+			case errCh <- err:
+			default:
+			}
+		}
+	}()
+
+	return errCh
 }
 
 func (p *Plugin) handleNICUpdate(log logr.Logger, oldObj, newObj interface{}) {

@@ -426,6 +426,25 @@ func Run(ctx context.Context, opts Options) error {
 		})
 	}
 
+	// Supervise the NIC plugin's informer watch (if it exposes cache errors), so a
+	// permanently-dead watch exits the process instead of silently stalling machines.
+	// A structural interface assertion (rather than a method on networkinterface.Plugin)
+	// keeps the plugin contract untouched: only apinet talks to a K8s API, so adding a
+	// health method to the interface would be scaffolding for the non-K8s plugins.
+	if cacheErrPlugin, ok := nicPlugin.(interface{ CacheErrors() <-chan error }); ok {
+		cacheErrs := cacheErrPlugin.CacheErrors()
+		if cacheErrs != nil {
+			g.Go(func() error {
+				select {
+				case err := <-cacheErrs:
+					return fmt.Errorf("network interface plugin watch failed: %w", err)
+				case <-ctx.Done():
+					return nil
+				}
+			})
+		}
+	}
+
 	g.Go(func() error {
 		return runMetricsServer(ctx, setupLog, opts.Servers.Metrics)
 	})
