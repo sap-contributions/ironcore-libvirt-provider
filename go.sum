@@ -156,8 +156,8 @@ github.com/ironcore-dev/ironcore-image v0.5.0 h1:L4ZLIV5WhOFk4Bp+PtBXut6nYXsCRAo
 github.com/ironcore-dev/ironcore-image v0.5.0/go.mod h1:seDdoS2K31VpL4LlKC9apbLs2fbGrHZEsPBR3dBYMs0=
 github.com/ironcore-dev/ironcore-net v0.6.0 h1:0O81zKDqxUrXkJX2o2ne49bE2PwRRe4C+isShk7ZKuM=
 github.com/ironcore-dev/ironcore-net v0.6.0/go.mod h1:+0u4ue9TDo1AtPNT4HNahz6v4WChfXCgpkLUec0+pVM=
-github.com/ironcore-dev/provider-utils v0.0.0-20261009075155-2798f2521268 h1:/aSLW6RZHI9anhnbdEPb9BYWYSaZCsGiIeJnMB8Q1vc=
-github.com/ironcore-dev/provider-utils v0.0.0-20261009075155-2798f2521268/go.mod h1:sRZf1OuUx3ea3LLPmzXVLz8ZVPDEuPiceXSqwd2SBy4=
+github.com/ironcore-dev/provider-utils v0.0.0-20261030081920-c2209eb7bc56 h1:nGLQ/UB1DLTqugFAuBlCZoxf3FgnUp+q94QatTZUCW0=
+github.com/ironcore-dev/provider-utils v0.0.0-20261030081920-c2209eb7bc56/go.mod h1:SaKC0yz02kpxidcdoult1GHtJh+ZZmIh2S5Dc932Bow=
 github.com/joshdk/go-junit v1.0.0 h1:S86cUKIdwBHWwA6xCmFlf3RTLfVXYQfvanM5Uh+K6GE=
 github.com/joshdk/go-junit v1.0.0/go.mod h1:TiiV0PqkaNfFXjEiyjWM3XXrhVyCa1K4Zfga6W52ung=
 github.com/json-iterator/go v1.1.12 h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=
@@ -221,9 +221,13 @@ github.com/prometheus/common v0.72.0 h1:tAYsE+sPJxIncDAobm4H5aQjmox9ZxEIIqPbiffa
 github.com/prometheus/common v0.72.0/go.mod h1:77NWqAQ2tXT7BIK40qjJdw5Acrsrg1TlHAnsQi3i6mk=
 github.com/prometheus/procfs v0.22.0 h1:6q9+/JL9IKAPbCmBrv9n5O5Ty3NKnciV5X7YGw0oics=
 github.com/prometheus/procfs v0.22.0/go.mod h1:CvmFr/GVhIjIvWJZW3tgkODBQMRIf0EyWMQLHCHab58=
+github.com/prometheus/procfs v0.23.0 h1:ad+S6FTkzwaMgacKLM5h6bNKExS+DMH0YiUwXItH/o4=
+github.com/prometheus/procfs v0.23.0/go.mod h1:3AVXO0FqLafyYFU/V/IQRZlC8Rgqz8Dm/x6pKLK+RIk=
 github.com/rogpeppe/go-internal v1.14.1 h1:UQB4HGPB6osV0SQTLymcB4TgvyWu6ZyliaW0tI/otEQ=
 github.com/rogpeppe/go-internal v1.14.1/go.mod h1:MaRKkUm5W0goXpeCfT7UZI6fk/L7L7so1lCWt35ZSgc=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
+github.com/sap-contributions/ironcore-provider-utils v0.0.0-20261030075330-2d0c6ba112f3 h1:Qrs4pmTD7j7dWI1AlZjVAcCqSqplR61+qsiVTAEhPKA=
+github.com/sap-contributions/ironcore-provider-utils v0.0.0-20261030075330-2d0c6ba112f3/go.mod h1:9HdH0cPcNTs9DSVy0tRhFwLanmLHCVuJduQCBG3ZkaA=
 github.com/shirou/gopsutil/v4 v4.26.9 h1:CaBo/hBFqvlJoLvAQEKdHdf5GD97/MN2ACfyv63+2Ig=
 github.com/shirou/gopsutil/v4 v4.26.9/go.mod h1:nKH+8wX2zxr/mDbsR+AAy6Qd2z4ZOQ7wfQaEp+yrYmg=
 github.com/sirupsen/logrus v1.9.4 h1:TsZE7l11zFCLZnZ+teH4Umoq5BhEIfIzfRDZ1Uzql2w=
@@ -310,6 +314,8 @@ golang.org/x/sys v0.0.0-20210616094352-59db8d763f22/go.mod h1:oPkhp1MJrh7nUepCBc
 golang.org/x/sys v0.1.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.48.0 h1:bbX/i/6MgT9BVLM9RT1thmxL04yeTAhbEz4SyadbXoo=
 golang.org/x/sys v0.48.0/go.mod h1:hNLxWAXmnKAxqDtdwIYC4bM9oQPEecfsnNMuSxOs3og=
+golang.org/x/sys v0.49.0 h1:XbzkgYJHdqh/8m2Uu0W/dQv8nktxx4BFHp1M0gROTXA=
+golang.org/x/sys v0.49.0/go.mod h1:hNLxWAXmnKAxqDtdwIYC4bM9oQPEecfsnNMuSxOs3og=
 golang.org/x/term v0.46.0 h1:3+OXuTbaKDgwk8jTi3aSLHRlmWqHEUDUtxnbFigO4YE=
 golang.org/x/term v0.46.0/go.mod h1:+K02xbkittuwc0Am4abfA3Fc+XRGXkvBXNO88NCXPoc=
 golang.org/x/text v0.42.0 h1:JbOZXgfeCPU9gacVtYliJqOhD+zhrEqK4LfdpmlUZqI=
